@@ -1,0 +1,36 @@
+<template>
+	<view>
+
+	</view>
+</template>
+
+<script>
+	const picker = weex.requireModule('picker')
+	export default {
+		name: "picks",
+		props:['tab','set'],
+		data() {
+			return {
+				
+			};
+		},
+		methods: {
+			show(index) {
+				picker.pick({
+					items: this.tab,
+					index:index,
+					confirmTitleColor:'#FE3481',
+					cancelTitleColor:'#5c5b5d'
+				}, event => {
+					if (event.result === 'success') {
+						this.set(event.data);
+					}
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+
+</style>

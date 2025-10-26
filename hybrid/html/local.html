@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" type="text/css" href="./cs/index.css"/>
+	<title>灯塔视频</title>
+</head>
+<!-- uni 的 SDK，必须引用。 -->  
+<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.1.js"></script>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/jiexi.js"></script>
+<script type="text/javascript">
+		document.addEventListener('UniAppJSBridgeReady', function() {
+			changeFrameHeight();
+			changeSrc('myiframe',$_GET['src']);
+		    uni.getEnv(function(res) {  
+		        console.log('当前环境：' + JSON.stringify(res));  
+		    });  
+		});
+	</script>
+<body>
+	<button type="button" class="btn-list">12btn-list3</button>
+	<iframe src="jiazai.html" frameborder="0" sandbox="allow-scripts allow-same-origin allow-popups" width="100%" height="800px" id="myiframe"></iframe>
+</body>
+<script>
+	
+	document.addEventListener('UniAppJSBridgeReady', function() {  
+	    document.querySelector('.btn-list').addEventListener('click', function(evt) {  
+			alert($_GET['src']);
+	       });  
+	});
+</script>
+
+</html>
