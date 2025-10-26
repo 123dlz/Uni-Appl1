@@ -1,0 +1,241 @@
+<template>
+	<div class="conn" @click="()=>{return false;}">
+
+		<div class="top">
+			<div v-if="!show" class="titlev">
+				<text class="t1">选择需要赠送的礼物</text>
+				<!-- <text class="btn btn1">赠送</text> -->
+				<text class="btn btn2" @tap="chnogzhi">充值</text>
+			</div>
+		</div>
+		<scroller scroll-direction="vertical" class="scroller">
+			<div class="listv">
+				<div :style="{opacity:show ? '0' : '1'}" ref="Ass" v-for="(item,index) in list" class="list"
+					@click="listap(item,index)">
+					<image class="list-img" :src="url + item.img"></image>
+					<text class="title">{{item.title}}</text>
+					<text class="money">{{item.money}}个钻石</text>
+				</div>
+				
+			</div>
+			<div class="showmas" v-if="show">
+				<image class="list-img2" :src="url + newitem.img"></image>
+				<image class="loadimg" v-if="load" src="../../../static/load.gif" mode=""></image>
+				<view class="infova" v-if="!load">
+					<text class="t1">您赠送了</text>
+					<text class="t2">{{newitem.title}}</text>
+					<text class="t1">给{{username}}</text>
+				</view>
+			</div>
+		</scroller>
+	</div>
+</template>
+
+<script>
+	const dom = weex.requireModule('dom');
+	const animation = weex.requireModule('animation')
+	export default {
+		data() {
+			return {
+				list: [],
+				load: false,
+				url: getApp().url,
+				newitem: null,
+				show: false,
+				title:'',
+				vodid:'',
+				userid:'',
+				username:''
+			}
+		},
+		computed:{
+			user(){
+				return this.$store.state.userinfo;
+			}
+		},
+		onReady() {
+			uni.getStorage({
+				key: 'gift',
+				success: (res) => {
+					this.list = res.data;
+					console.log(this.list.length)
+				}
+			})
+		},
+		onLoad(){  
+		    // 监听事件  
+		  uni.$on('sendNum',(res)=>{  
+		        this.vodid = res.vodid
+		        this.title = res.title
+				this.userid = res.userid
+				this.username = res.username
+		     })  
+		},  
+		onUnload() {  
+		    // 移除监听事件
+		    uni.$off('sendNum');
+		},
+
+		methods: {
+			chnogzhi() {
+				uni.getCurrentSubNVue().hide('slide-out-bottom');
+				uni.navigateTo({
+					url: '../wode/wallet/diamond/diamond'
+				})
+			},
+			listap(item, index) {
+				this.newitem = item;
+				this.load = true;this.show = true;
+				let sign = getApp().md5(this.user.token + item.id);
+				getApp().GetJson(getApp().ip + 'givegiftss.php','POST',{
+					sign:sign,
+					token:this.user.token,
+					id:item.id,
+					uuserid:this.userid,
+					vodid:this.vodid
+				},e=>{
+					console.log(e);
+					if(getApp().isdata(e)){
+						if(e.is == 300){
+							this.showToast('钻石不足，赶紧充值吧！');this.hide();
+							uni.navigateTo({
+								url: '../wode/wallet/diamond/diamond'
+							})
+						}else{
+							getApp().$store.state.userinfo.diamonds = e.diamonds;
+							this.load = false;
+							setTimeout(()=>{
+								this.show = false;
+							},4000) 
+						}
+
+					}else{
+						this.hide();
+					}
+				})
+			},
+			hide(){
+				this.load = false;this.show = false;
+			}
+		}
+	}
+</script>
+
+<style>
+	.conn {
+		background-color: rgba(0, 0, 0, 0.8);
+		border-radius: 30rpx 30rpx 0 0;
+	}
+
+	.top {
+		background-color: rgba(0, 0, 0, 0.9);
+		height: 100rpx;
+		border-radius: 30rpx 30rpx 0 0;
+	}
+
+	.titlev {
+		flex-direction: row;
+		align-items: center;
+		flex: 2;
+		padding: 0 30rpx;
+	}
+
+	.titlev .t1 {
+		color: #FC4890;
+		font-size: 25rpx;
+		font-weight: 500;
+		flex: 1;
+	}
+
+	.btn {
+		width: 150rpx;
+		height: 50rpx;
+		border-radius: 20rpx;
+		line-height: 50rpx;
+		align-items: center;
+		color: #FC4890;
+		font-size: 27rpx;
+		text-align: center;
+	}
+
+	.btn1 {
+		background-color: #FC4890;
+		margin-right: 32rpx;
+	}
+
+	.btn2 {
+		border: 1rpx solid #FC4890;
+	}
+
+	.list-img {
+		width: 80rpx;
+		height: 80rpx;
+		margin-bottom: 10rpx;
+	}
+
+	.title {
+		color: #FFFFFF;
+		font-size: 23rpx;
+		font-weight: 500;
+		margin-bottom: 10rpx;
+	}
+
+	.money {
+		font-size: 22rpx;
+		color: #A9A7A7;
+	}
+
+	.scroller {
+		flex: 1;
+	}
+
+	.listv {
+		flex-direction: row;
+		flex-wrap: wrap;
+		padding-left: 30rpx;
+		margin-top: 60rpx;
+		position: relative;
+	}
+
+	.list {
+		width: 150rpx;
+		margin: 0 30rpx 30rpx 0;
+		align-items: center;
+		transition: opacity 0.3s;
+	}
+
+	.showmas {
+		position: absolute;
+		margin: 0 30rpx 30rpx 0;
+		align-items: center;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		justify-content: center;
+	}
+	.loadimg{
+		width: 26rpx;
+		height: 26rpx;
+		opacity: 0.7;
+	}
+	.list-img2{
+		width: 123rpx;
+		height: 123rpx;
+		margin-bottom: 30rpx;
+	}
+	.infova{
+		flex-direction: row;
+		align-items: center;
+		font-size: 29rpx;
+		color: #FFFFFF;
+	}
+	.infova .t1{
+		font-size: 29rpx;
+		color: #FFFFFF;
+	}
+	.infova .t2{
+		font-size: 29rpx;
+		color: #FE1F7D;
+	}
+</style>

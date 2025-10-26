@@ -1,0 +1,229 @@
+<template>
+	<div class="conn" @click="()=>{return false;}">
+
+		<div class="top">
+			<div v-if="!show" class="titlev">
+				<text class="t1">影片详情</text>
+			</div>
+		</div>
+		<scroller scroll-direction="vertical" class="scroller">
+		<view  style="margin: 20rpx;">
+			
+			<view >
+				<text  style="font-size: 40rpx;font-weight: 700;padding-left: 20rpx;">{{playname}}</text>
+				<text  style="border-radius: 20rpx; font-size: 27rpx;color:#FFFFFF;background-color: #0bbe74;height: 70rpx; margin: 10rpx;padding-top: 20rpx;padding-left: 20rpx;">分类: {{playclass}}  | 地区: {{diqu}} | 年份: {{nianfen}} | 评分:{{pingfen}}
+					</text>
+			</view>
+			
+		    <view >
+			<text style="font-size: 30rpx;color: #000000;margin: 20rpx;">导演：{{daoyan}}</text>
+		   </view>
+								   
+		    <view  >
+			<text style="font-size: 30rpx;color: #000000;margin: 20rpx;">演员：{{yanyuan}}</text>
+		   </view>
+		   
+		 </view> 
+		
+		<view>
+		<text style="font-size: 30rpx;color: #000000;margin: 30rpx;">{{text}}</text>	
+		</view>
+		<view style="height: 50rpx;"></view>
+		</scroller>
+	</div>
+</template>
+
+<script>
+	const dom = weex.requireModule('dom');
+	const animation = weex.requireModule('animation')
+	export default {
+		data() {
+			return {
+				data:'',
+				list: [],
+				load: false,
+				url: getApp().url,
+				newitem: null,
+				show: false,
+				title:'',
+				vodid:'',
+				playname:'',
+				playtime:'',
+				playclass:'',
+				text:'',
+				daoyan:'',
+				yanyuan:'',
+				diqu:'',
+				nianfen:'',
+				pingfen:''
+			}
+		},
+		computed:{
+			user(){
+				return this.$store.state.userinfo;
+			}
+		},
+		onReady() {
+			uni.getStorage({
+				key: 'more',
+				success: (res) => {
+					this.list = res.data;
+					console.log(this.list.length)
+				}
+			})
+		},
+		onLoad(){  
+		    // 监听事件  
+		  uni.$on('sendNum',(res)=>{  
+		        this.text = res.text
+		        this.daoyan = res.daoyan
+		        this.yanyuan = res.yanyuan
+		        this.diqu = res.diqu
+		        this.nianfen = res.nianfen
+		        this.pingfen = res.pingfen
+		        this.playurl = res.playurl
+		        this.playname = res.playname
+		        this.playtime = res.playtime
+		        this.playclass = res.playclass
+		     })  
+		},  
+		onUnload() {  
+		    // 移除监听事件
+		    uni.$off('sendNum');
+		},
+
+		methods: {
+			colse(){
+				uni.getCurrentSubNVue().hide('slide-out-bottom');
+				uni.navigateTo({ 
+					url: '../wode/wallet/diamond/diamond'
+				}) 
+			},
+			hide(){
+				this.load = false;this.show = false;
+			}
+		}
+	}
+</script>
+
+<style>
+	.conn {
+		background-color: #FFFFFF;
+		border-radius: 30rpx 30rpx 0 0;
+	}
+
+	.top {
+		box-shadow: -2rpx -3rpx 15rpx #000000;
+		background-color: #FFFFFF;
+		height: 80rpx;
+		border-top: 1rpx #E8E8E8;
+		border-bottom: 1rpx #E8E8E8;
+	}
+
+	.titlev {
+		flex-direction: row;
+		align-items: center;
+		flex: 2;
+		padding: 0 30rpx;
+	}
+
+	.titlev .t1 {
+		color: #585858;
+		font-size: 32rpx;
+		text-align: center;
+		font-weight: 500;
+		flex: 1;
+	}
+
+	.btn {
+		width: 150rpx;
+		height: 50rpx;
+		border-radius: 20rpx;
+		line-height: 50rpx;
+		align-items: center;
+		color: #FC4890;
+		font-size: 27rpx;
+		text-align: center;
+	}
+
+	.btn1 {
+		background-color: #FC4890;
+		margin-right: 32rpx;
+	}
+
+	.btn2 {
+		border: 1rpx solid #FC4890;
+	}
+
+	.list-img {
+		width: 80rpx;
+		height: 80rpx;
+		margin-bottom: 10rpx;
+	}
+
+	.title {
+		color: #FFFFFF;
+		font-size: 23rpx;
+		font-weight: 500;
+		margin-bottom: 10rpx;
+	}
+
+	.money {
+		font-size: 22rpx;
+		color: #A9A7A7;
+	}
+
+	.scroller {
+		flex: 1;
+	}
+
+	.listv {
+		flex-direction: row;
+		flex-wrap: wrap;
+		padding-left: 30rpx;
+		margin-top: 60rpx;
+		position: relative;
+	}
+
+	.list {
+		width: 150rpx;
+		margin: 0 30rpx 30rpx 0;
+		align-items: center;
+		transition: opacity 0.3s;
+	}
+
+	.showmas {
+		position: absolute;
+		margin: 0 30rpx 30rpx 0;
+		align-items: center;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		justify-content: center;
+	}
+	.loadimg{
+		width: 26rpx;
+		height: 26rpx;
+		opacity: 0.7;
+	}
+	.list-img2{
+		width: 123rpx;
+		height: 123rpx;
+		margin-bottom: 30rpx;
+	}
+	.infova{
+		flex-direction: row;
+		align-items: center;
+		font-size: 29rpx;
+		color: #FFFFFF;
+	}
+	.infova .t1{
+		font-size: 29rpx;
+		color: #FFFFFF;
+	}
+	.infova .t2{
+		font-size: 29rpx;
+		color: #FE1F7D;
+	}
+</style>

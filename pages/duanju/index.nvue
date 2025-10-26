@@ -1,0 +1,931 @@
+<template>
+	<view class="detail">
+		<view class="top_tab">
+			<view style="display: flex; flex-direction: row; justify-content: space-around;text-align: center;justify-content:center;align-items:center;">
+				<text style="padding: 10rpx 25rpx;font-size: 35rpx;font-weight: 800;color: yellow;">推荐</text>
+				<text @tap="pages()"  style="padding: 10rpx 25rpx;font-size: 35rpx;font-weight: 800;color: #FFF">全部</text>
+			</view>
+			<view style="display: flex; flex-direction: row; justify-content: space-around;text-align: center;justify-content:center;align-items:center;margin-top: -10rpx;">
+				<text style="padding: 10rpx 25rpx;background-color: yellow;height:10rpx;width:70rpx;margin-right: 115rpx;"></text>
+			</view>
+		</view>
+		<view v-if="page==2">
+			<index></index>
+		</view>
+		<swiper v-if="page==1" :skip-hidden-item-layout="true" :disable-programmatic-animation="true" :circular="false"
+			class="swipers swiper-slide" @change="change" :current="current" :vertical="true" :indicator-dots="false"
+			:autoplay="false" :interval="1000" :duration="600"  @transition="changes">
+			<swiper-item class="swipers-item" v-for="(item,index) in swiperList" :key="item.courseDetailsId">
+				<view class="swipers-items" v-if="current === index">
+					<!--没有锁定剧集的播放器-->	
+					<video @click="play(item.courseId,item.courseDetailsName)"  :play-strategy="2" :show-loading="true"
+						:object-fit="item.video_frame" codec="software" :muted="false" :show-center-play-btn="true" :loop="true" @ended="ended"
+						:enable-progress-gesture="false" id="myVideo" :src="item.videoUrl" :autoplay="item.autoPlay"
+						class="swipers-items-video">
+					</video>
+						<!--  video的object-fit标签说明：包含：contain，填充：fill，覆盖：cover   根据情况使用  -->
+					</image>
+					<text class="swipers-items-name">{{item.name}}</text>
+					<!-- 右边操作 -->
+					<view class="swipers-items-right" :style="rightTop">
+						<view class="swipers-items-right-item">
+							<view class="swipers-items-right-item" >
+								<view class="swipers-items-right-item-img">
+									<image class="swipers-items-right-item-imgs" src="../../static/video/look.png" mode="">
+									</image>
+								</view>
+								<view class="swipers-items-right-item-txt">
+									<text class="swipers-items-right-item-txts">
+										{{item.lock_num}}
+									</text>
+								</view>
+							</view>
+							<view class="swipers-items-right-item-img" @click.stop="taplike(item)">
+								<image v-if="!isdianzan" class="swipers-items-right-item-imgs"
+									src="../../static/video/aixin.png" mode=""></image>
+								<image v-else class="swipers-items-right-item-imgs" src="../../static/video/aixins.png"
+									mode=""></image>
+							</view> 
+							<view class="swipers-items-right-item-txt">
+								<text class="swipers-items-right-item-txts">
+									{{item.like}}
+								</text>
+							</view>
+						</view>
+						<view class="swipers-items-right-item" @click="opencomment(item)">
+							<view class="swipers-items-right-item-img">
+								<image class="swipers-items-right-item-imgs" src="../../static/video/pl.png" mode="">
+								</image>
+							</view>
+							<view class="swipers-items-right-item-txt">
+								<text class="swipers-items-right-item-txts">
+									{{item.comment_num}}
+								</text>
+							</view>
+						</view>
+						<!--#ifndef H5 -->
+						<!--#endif-->
+					</view>
+					<!-- 底部视频信息 -->
+					<view class="swipers-items-btom" style="margin-top:-10rpx" >
+						<view class="swipers-items-btom-box" >
+							<view style="padding: 25rpx 15rpx;border-radius: 5rpx;flex-direction: row;top:32rpx;margin-left: -15rpx;"
+								class="swipers-items-btom-box-num">
+								<view class="list-title-l" >
+									<text class="swipers-items-btom-box-nums iconfont"
+										style="font-size: 45rpx;font-weight: 700;color:red">
+										&#xe6cc;
+									</text>
+									<text  class="swipers-items-btom-box-nums iconfont"
+										style="font-size: 30rpx;font-weight: 700;margin-left: 10rpx;">
+										好剧推荐
+									</text>
+								</view>
+							</view>
+							<view  style="background-color: rgba(0,0,0,0.5);padding: 25rpx 15rpx;flex-direction: row;top:5rpx;border-radius: 15rpx;"
+								class="swipers-items-btom-box-num">
+								<view class="list-title-l" >
+									<image style="border-radius: 8rpx;border: 2rpx solid #BBBBBB;" class="list-title-lIcon" :src="appurl + item.titleImg" mode=""></image>
+								</view>
+								<view> 
+									<text class="swipers-items-btom-box-nums"
+										style="font-size: 35rpx;font-weight: 700;margin-left: 15rpx;">
+										{{item.courseDetailsName}}
+									</text> 
+									<view class="text-top" :style="dev=='android' || dev== 'ios'?'width: 500rpx;':''">
+										<text class="swipers-items-btom-box-nums vodinfo">
+											{{item.content}}
+										</text>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</swiper-item>
+		</swiper>
+	</view>
+</template>
+
+<script>
+	var app = getApp()
+	import appShare, {
+		closeShare
+	} from '../../js_sdk/appShare.js';
+	export default {
+		name:"duanjuplay",
+		props:['close'],
+		data() {
+			return {
+				current: 0,
+				maskCustomStyle: {
+					background: 'rgba(0, 0, 0, 0.5)'
+				},
+				videoList: [],
+				dev:uni.getSystemInfoSync().platform,
+				videoContext: null, //记录当前视频的上下文
+				courseId: '',
+				meunList: [], //菜单
+				meunTop: 37, //返回图标距离顶部的距离
+				num: 1, //当前播放的集数
+				scrollIntoView: '', //当前播放视频的位置
+				scrollIntoViews: 'video0', //当前播放视频的位置
+				rightTop: {
+					top: '0rpx'
+				},
+				page:1,
+				backnum: false,
+				appurl: app.url,
+			};
+		},
+		//#ifdef APP-PLUS-NVUE
+		beforeCreate() {
+			const domModule = uni.requireNativePlugin('dom')
+			domModule.addRule('fontFace', {
+				'fontFamily': "myIconfont",
+				'src': "url('../../static/font/iconfont.ttf')",
+			});
+		},
+		//#endif
+		computed: {
+			swiperList() {
+				return this.videoList;
+			},
+			user() {
+				return app.$store.state.userinfo;
+			}
+		},
+		onHide() {
+			this.videoContext.pause()
+		},
+		onUnload() {
+			 this.videoContext.pause()
+		},
+		onLoad(e) {
+			
+			let that = this
+			//获取设备的高度
+			uni.getSystemInfo({
+				success(res) {
+					//计算右侧操作拦的位置
+					//#ifndef H5
+					//that.rightTop.top = '800rpx'//950
+					//#endif
+					//#ifdef H5
+					//that.rightTop.top = '850rpx'//850
+					//#endif
+					that.rightTop.top = res.screenHeight - (500 / 2) + 'rpx'
+				},
+				fail() {
+					//如果获取屏幕的高度失败，那么位置默认设置为通用高度530rpx
+					that.rightTop.top = '530rpx'
+
+				}
+			})
+			this.getDataList();
+			uni.addInterceptor('switchTab', { 
+                success: (e) => {
+                  this.videoContent.pause();
+                }
+            })
+			uni.addInterceptor('navigateTo', { //监听跳转
+                success: (e) => {
+					let numIdCurr = this.videoList[this.current].courseDetailsId;
+					this.videoContextId = 'myVideo'
+					this.videoContext = uni.createVideoContext(this.videoContextId, this);
+					this.$nextTick(() => {
+						this.videoContext.pause();
+					})
+                }
+            })
+		},
+		onShow() {
+			this.$nextTick(() => { 
+				this.videoContext.play();
+			})
+		},
+		onReady() {
+			this.videoContext = uni.createVideoContext('myVideo', this);
+		},
+		methods: {
+			pages(type){
+				this.videoContext = uni.createVideoContext('myVideo', this);
+				this.$nextTick(() => {
+					this.videoContext.pause();
+				})
+				uni.navigateTo({
+					url:'./list'
+				})
+			},
+			ended() {
+				if (this.current < this.videoList.length - 1) {
+					this.current += 1
+				}
+			},
+			changes(e){
+				if (e.detail.dy == 0 ) {
+				  if (this.current < this.videoList.length - 1 ) {
+				   	this.current += 1
+				   }
+				   //采用该方法提高滑动稳定性 
+				}
+			},
+			change(e) {
+				let current = Number(e.detail.current);
+				this.startPlay(current);
+				this.current = current;
+			},
+			startPlay(current) {
+				if (this.videoContext) { 
+					this.videoContext.stop();
+					this.videoContext = null;
+				}
+				let numIdCurr = this.videoList[current].courseDetailsId;
+					this.videoContextId = 'myVideo'
+					this.videoContext = uni.createVideoContext(this.videoContextId, this);
+					this.$nextTick(() => {
+						this.videoContext.play();
+					})
+				this.$forceUpdate();
+			},
+			play(id,name) {
+				let numIdCurr = this.videoList[this.current].courseDetailsId;
+				this.videoContextId = 'myVideo'
+				this.videoContext = uni.createVideoContext(this.videoContextId, this);
+				this.$nextTick(() => {
+					this.videoContext.pause();
+				})
+				uni.navigateTo({
+					url: '../duanju/play?id=' + id + '&courseDetailsId=1' + '&name=' + name
+				})
+				
+			},
+			getDataList() {
+				let promise = new Promise((resolve, reject) => {
+					app.GetJson(app.ip + 'Duanju-api.php', 'POST', {
+						type: 'get_tab_video',
+					}, e => {
+						console.log(e)
+						this.list = e.list;
+						if (e.list.length == 0) {
+							uni.showToast({
+								icon: 'none',
+								title: '暂无视频'
+							})
+						} else {
+							let videoGroup = [];
+							for (let item of e.list) {
+								videoGroup.push({
+									courseDetailsId: item.id, //当前视频id
+									courseId: item.vod_id, //视频id
+									courseDetailsName: item.name, //视频标题
+									content: item.info, //视频简介
+									like: item.like, //点赞数量
+									videoUrl: item.url,
+									comment_num: item.comment_num,
+									lock_num: item.num,
+									titleImg: item.img,
+									count:item.count,
+									autoPlay:true,
+									video_frame:item.video_frame,
+								});
+							} 
+							this.videoList = [...this.videoList, ...videoGroup];
+							this.$forceUpdate();
+							resolve(); 
+						}
+					})
+				});
+				return promise;
+			},
+		}
+	}
+</script>
+
+<style>
+	page{
+		background-color: #111111;
+	}
+	/*#ifdef APP-PLUS*/
+	.iconfont {
+		font-family: myIconfont;
+	}
+	/*#endif*/
+	/*#ifdef H5*/
+	.iconfont {
+	    font-family: "iconfont";
+	  }
+	.icon-hot{
+		content: "\e6cc";
+	}
+	  /*#endif*/
+    .video {
+        width: 750rpx;
+    }
+	.listv {
+		flex-direction: row;
+		flex-wrap: wrap;
+		padding-left: 15rpx;
+		position: relative;
+	}
+
+	.title {
+		background-color: #F4F3F3;
+		padding: 15rpx 60rpx;
+		border-radius: 50rpx;
+		color: #636363;
+		font-size: 23rpx;
+		font-weight: 500;
+		margin-bottom: 10rpx;
+	}
+
+	.lists {
+		width: 150rpx;
+		padding: 20rpx 20rpx;
+		border-radius: 5rpx;
+		margin: 0 30rpx 20rpx 0;
+		background-color: #F5F5F5;
+		color: #A1A1A2;
+		/*align-items: center;*/
+		transition: opacity 0.3s;
+	}
+
+	.buttom {
+		z-index: 1;
+		position: fixed;
+		bottom: 20rpx;
+		left: 0;
+		right: 0;
+		padding: 8rpx;
+
+	}
+
+	.commentlistv {
+		flex-direction: row;
+		flex-wrap: wrap;
+		margin-top: 10rpx;
+		position: relative;
+	}
+
+	.commentlist {
+		margin-top: -10rpx;
+		width: 590rpx;
+		padding: 15rpx 15rpx;
+		border-radius: 5rpx;
+		color: #A1A1A2;
+		transition: opacity 0.3s;
+	}
+
+	.commenttime {
+		border-radius: 15rpx 0 15rpx 0;
+		font-size: 26rpx;
+		color: #BBBBBB;
+		text-align: center;
+		position: absolute;
+		/* #ifdef APP-PLUS */
+		right: 100%;
+		/* #endif */
+		/* #ifdef H5 */
+		right: 30%;
+		/* #endif */
+		z-index: 10;
+	}
+
+	.xuanjiimg {
+		left:20rpx;
+		width: 35rpx;
+		height: 35rpx;
+		/*#ifdef APP-PLUS*/
+		top:15rpx;
+		/*#endif*/
+		/*#ifdef H5*/
+		top: 0;
+		/*#endif*/
+
+	}
+
+	.xuanjia {
+		/*#ifdef H5*/
+		height: 100%;
+		/*#endif*/
+	}
+
+	.xuanjib {
+		/*#ifdef H5*/
+		height: 100%;
+		/*#endif*/
+	}
+    .top_tab {
+		
+    	border-radius: 50rpx;
+    	margin: 20rpx;
+    	/*#ifdef APP-PLUS*/
+    	margin-top: 90rpx;
+    	/*#endif*/
+    	/*#ifdef H5*/
+    	margin-top: 20rpx;
+    	/*#endif*/
+    	position: fixed;
+    	left: 0;
+    	right: 0;
+    	top: 0;
+    	z-index: 1;
+    }
+	
+	.textarea {
+		margin: 10rpx;
+		width: 580rpx;
+		height: 80rpx;
+		border-radius: 20rpx;
+		color: #000;
+		background-color: #F8F8F8;
+		font-size: 35rpx;
+		padding: 18rpx;
+	}
+
+	
+    
+	.scroller {
+		flex: 1;
+	}
+
+	.paydata {
+		flex-direction: row;
+		margin-top: 60rpx;
+		position: relative;
+	}
+
+	.paydatas {
+		width: 150rpx;
+		margin: 0 30rpx 30rpx 0;
+		align-items: center;
+		transition: opacity 0.3s;
+	}
+
+	.lbblurb {
+		font-size: 25rpx;
+		margin-top: 10rpx;
+		flex: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		opacity: .7;
+	}
+
+	.lbvodname {
+		color: #FFF;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		lines: 2;
+	}
+
+	.lbpic {
+		border-radius: 9rpx;
+		width: 220rpx;
+		height: 300rpx;
+	}
+
+	.tag{
+		border-radius: 15rpx 0 15rpx 0;
+		background-color: #ff3565;
+		
+	}
+	.liststext {
+		font-size: 26rpx;
+		font-weight: 700;
+		color:  #999999;
+	}
+    .lock{
+    	font-size: 45rpx;
+    	font-weight: 700;
+		top: -1rpx;
+    	color:red;
+		color: #999999;
+		text-align: center;
+		position: absolute;
+		/*#ifdef H5*/
+		left: 62%;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		left: 50%;
+		/*#endif*/
+		z-index: 10;
+		padding: 5rpx 2rpx;
+    }
+	.unlock{
+		font-size: 43rpx;
+		font-weight: 700;
+		top: -3rpx;
+		color:red;
+		color: #1FC263;
+		text-align: center;
+		position: absolute;
+		/*#ifdef H5*/
+		left: 62%;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		left: 50%;
+		/*#endif*/
+		z-index: 10;
+		padding: 5rpx 2rpx;
+	}
+	.tags {
+		border-radius: 15rpx 0 15rpx 0;
+		background-color: #1FC263;
+		margin-top: 15rpx;
+		color: #FFF;
+		text-align: center;
+		position: absolute;
+		/*#ifdef H5*/
+		left: 62%;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		left: 50%;
+		/*#endif*/
+		z-index: 10;
+		margin-top: -15rpx;
+		font-size: 18rpx;
+		padding: 10rpx 3rpx;
+	}
+
+	.tagss {
+		border-radius: 15rpx 0 15rpx 0;
+		background-color: #48B2FE;
+		margin-top: 15rpx;
+		color: #FFF;
+		text-align: center;
+		position: absolute;
+		/*#ifdef H5*/
+		left: 62%;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		left: 50%;
+		/*#endif*/
+		z-index: 10;
+		margin-top: -15rpx;
+		font-size: 18rpx;
+		padding: 5rpx 3rpx;
+	}
+
+	.detail {
+		width: 750rpx;
+		flex: 1;
+		background-color: #000;
+	}
+
+	.swipers {
+		width: 750rpx;
+		/*#ifdef APP-PLUS */
+		flex: 1;
+		/*#endif*/
+		
+		/*#ifdef H5*/
+		height: 100vh;
+		/*#endif*/
+	}
+
+	.swipers-item {
+		width: 750rpx;
+		flex: 1;
+		/*#ifdef H5*/
+		height: 100%;
+		flex: 1;
+		position: relative;
+		/*#endif*/
+	}
+
+	.swipers-items {
+		width: 750rpx;
+		/*#ifdef H5*/
+		height: 100%;
+		/*#endif*/
+		flex: 1;
+		position: relative;
+		background-color: #000;
+	}
+    
+	.swipers-items-video {
+		/*#ifdef APP-PLUS */
+		flex: 1;
+		width: 750rpx;
+		/*#endif*/
+		width: 750rpx;
+		/*#ifdef H5*/
+		width: 100%;
+		height: 100%;
+		/*#endif*/
+		
+	}
+
+	.swipers-items-imgsbg {
+		width: 750rpx;
+		/*#ifdef H5*/
+		height: 100%;
+		/*#endif*/
+		flex: 1;
+	}
+
+	.swipers-items-back {
+		position: absolute;
+		left: 10rpx;
+		/*#ifdef H5*/
+		top: 30rpx;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		top: 98rpx;
+		/*#endif*/
+		width: 50rpx;
+		height: 50rpx;
+		z-index: 999;
+	}
+	.swipers-items-name {
+		position: absolute;
+		left: 80rpx;
+		/*#ifdef H5*/
+		top: 30rpx;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		top: 95rpx;
+		/*#endif*/
+		width: 750rpx;
+		height: 60rpx;
+		z-index: 999;
+		color:#FFF;
+	}
+    .swipers-items-ads{
+		position: absolute;
+		left: 40rpx;
+		/*#ifdef H5*/
+		top: 30rpx;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		top: 190rpx;
+		/*#endif*/
+		width: 750rpx;
+		height: 60rpx;
+		z-index: 999;
+	}
+	.swipers-items-right {
+		position: absolute;
+		width: 60rpx;
+		top: 100rpx;
+		right: 20rpx;
+	}
+
+	.swipers-items-right-item {
+		width: 60rpx;
+		margin-bottom: 40rpx;
+	}
+
+	.swipers-items-right-item-img {
+		width: 60rpx;
+		height: 60rpx;
+	}
+
+	.swipers-items-right-item-imgs {
+		width: 60rpx;
+		height: 60rpx;
+	}
+
+	.swipers-items-right-item-txt {
+		width: 60rpx;
+	}
+
+	.swipers-items-right-item-txts {
+		width: 60rpx;
+		color: #ffffff;
+		font-size: 24rpx;
+		text-align: center;
+	}
+
+
+	.swipers-items-btom {
+		/*#ifdef H5*/
+		bottom: 200rpx;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		bottom: 10rpx;
+		/*#endif*/
+		width: 750rpx;
+		position: absolute;
+		align-items: center;
+	}
+
+	.swipers-items-btom-box {
+		/*#ifdef H5*/
+		width:97%;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		width: 710rpx;
+		/*#endif*/
+	}
+
+	.swipers-items-btom-box-title {
+		/*#ifdef H5*/
+		width:97%;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		width: 710rpx;
+		/*#endif*/
+	}
+    .text-top{
+		/*#ifdef H5*/
+		width:96%;
+		height:160rpx;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		width: 500rpx;
+		height:160rpx;
+		/*#endif*/
+		
+	}
+	.swipers-items-btom-box-titles {
+		/*#ifdef H5*/
+		width:97%;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		width: 710rpx;
+		/*#endif*/
+		color: #ffffff;
+		font-size: 30rpx;
+	}
+
+	.swipers-items-btom-box-content {
+		/*#ifdef H5*/
+		width:97%;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		width: 710rpx;
+		/*#endif*/
+		margin-top: 10rpx;
+	}
+
+	.swipers-items-btom-box-contents {
+		color: #ffffff;
+		font-size: 28rpx;
+	}
+
+	.swipers-items-btom-box-num {
+		/*#ifdef H5*/
+		width:97%;
+		/*#endif*/
+		/*#ifdef APP-PLUS-NVUE*/
+		width: 710rpx;
+		/*#endif*/
+		margin-top: 20rpx;
+	}
+
+	.swipers-items-btom-box-nums {
+		color: #ffffff;
+		font-size: 30rpx;
+	}
+    .vodinfo{
+    	color: #C4C4C4;
+		margin-left: 12rpx;
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 5;
+		-webkit-box-orient: vertical;
+		opacity: .7;
+    }
+	.list {
+		width: 750rpx;
+		align-items: center;
+
+	}
+
+	.list-title {
+		width: 710rpx;
+		margin-top: 30rpx;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.list-title-l {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.list-title-lIcon {
+		width: 180rpx;
+		height:220rpx;
+		border-radius: 6rpx;
+	}
+
+	.list-title-ls {
+		margin-left: 15rpx;
+		color: #000000;
+		font-size: 32rpx;
+		font-weight: bold;
+	}
+
+	.list-title-r {
+		width: 40rpx;
+		height: 40rpx;
+	}
+
+	.list-title-rs {
+		width: 30rpx;
+		height: 30rpx;
+	}
+
+	.list-content {
+		width: 750rpx;
+		height: 900rpx;
+		margin-bottom: 40rpx;
+	}
+
+
+	.list-content-item {
+		width: 710rpx;
+		margin-bottom: 20rpx;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.list-content-item-rs {
+		font-weight: 400;
+		font-size: 12px;
+		color: #5074ff;
+	}
+
+	.list-content-item-l {
+		flex-direction: row;
+
+	}
+
+	.list-content-item-ls {
+		width: 140rpx;
+		height: 160rpx;
+		border-radius: 10rpx;
+	}
+
+	.list-content-item-l-c {
+		width: 400rpx;
+		margin-left: 20rpx;
+	}
+
+	.list-content-item-l-c-num {}
+
+	.list-content-item-l-c-nums {
+		color: #000000;
+		font-size: 32rpx;
+		font-weight: bold;
+	}
+
+	.list-content-item-l-c-title {
+		margin-top: 10rpx;
+	}
+
+	.list-content-item-l-c-titles {
+		color: #000000;
+		font-size: 32rpx;
+
+	}
+
+	.list-content-item-l-c-content {
+		margin-top: 10rpx;
+	}
+
+	.list-content-item-l-c-contents {
+		color: #000000;
+		font-size: 30rpx;
+	}
+
+	.pay {
+		width: 750rpx;
+		align-items: center;
+	}
+
+	.list-title-lss {
+		color: #FFF;
+		font-size: 32rpx;
+		font-weight: bold;
+		margin-left: 15rpx;
+	}
+
+	.pay-content {
+		width: 710rpx;
+		margin-top: 40rpx;
+		margin-bottom: 40rpx;
+	}
+
+	.pay-content-item {
+		width: 710rpx;
+		height: 92rpx;
+		border-radius: 20rpx;
+		background-color: hotpink;
+		margin-bottom: 40rpx;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.pay-content-items {
+		color: #FFF;
+		font-size: 28rpx;
+		font-weight: bold;
+	}
+</style>

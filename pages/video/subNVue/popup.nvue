@@ -1,0 +1,131 @@
+<template>
+	<div>
+		
+		<div class="mask" ref="mask" @tap="hide" :style="{opacity:show ? '1' : '0'}"></div>
+		<div class="mainv" ref="mainv">
+		<scroller scroll-direction="vertical" class="scroller">
+			<div class="listv">
+				<div  ref="Ass" v-for="(item,index) in data.arr" class="list"
+					@click="listap(item,index)">
+					<image class="icon" :style="{opacity:data.index == index ? '1' : '0'}" src="../../../static/gouxuan.png"
+						mode=""></image>
+					<text class="title row" :class="data.index == index ? 'newcolor' : ''">{{item}}</text>
+				</div>
+				
+			</div>
+			
+		</scroller>
+		
+		
+	</div>
+</template>
+
+<script>
+	var animation = weex.requireModule('animation');
+	const _subnvue = uni.getCurrentSubNVue();
+	export default {
+		data() {
+			return {
+				data: {
+					index: 0,
+					arr: [,,,]
+				},
+				show:false,
+				index:0
+			}
+		},
+		onShow() {
+			uni.$on('subNVueshow', e => {
+				this.data = e[0];this.index = e[1];
+				_subnvue.show();
+				this.animations(true);
+			})
+			uni.$on('subNVuehide', e => {
+				this.animations(false);
+			})
+		},
+		onReady() {
+			_subnvue.setStyle({
+			    top: plus.navigator.getStatusbarHeight() + 44 + uni.upx2px(80) + 'px'
+			})
+		},
+		onUnload() {
+			uni.$off('subNVueshow');
+			uni.$off('subNVuehide');
+		},
+		methods: {
+			listap(index) {
+				this.animations(false);
+				this.data.index = index;
+				uni.$emit('subNVuetabtap',[this.index,index])
+			},
+			hide(){
+				this.animations(false);
+			},
+			animations(show){
+				this.show = show;
+				animation.transition(this.$refs.mainv, {
+					styles: {
+						transform: 'translateY(' + (show ? '0' : '-100%') + ')',
+					},
+					duration: 300, //ms
+					timingFunction: 'ease-in-out',
+					needLayout: true,
+				}, function() {
+					if(!show)_subnvue.hide();
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+	.mask {
+		position: absolute;
+		top: 50;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background-color: rgba(0, 0, 0, 0.1);
+		opacity: 0;
+		transition: opacity 0.3s ease-in-out;
+	}
+
+	.mainv {
+		border-radius: 0 0 30rpx 30rpx;
+		background-color: #FFFFFF;
+		padding-bottom: 20rpx;
+		padding-left: 15rpx;
+		transform: translateY(-100%);
+	}
+
+	.listv {
+		flex-direction: row;
+		flex-wrap: wrap;
+		padding-left: 30rpx;
+		margin-top: 60rpx;
+		position: relative;
+	}
+	
+	.list {
+		width: 150rpx;
+		margin: 0 30rpx 30rpx 0;
+		align-items: center;
+		transition: opacity 0.3s;
+	}
+
+	.icon {
+		width: 30rpx; 
+		height: 30rpx;
+		margin-right: 20rpx;
+	}
+
+	.title {
+		align-items: center;
+		font-size: 14px;
+	}
+
+	.newcolor {
+		color: #EF4E7D;
+	}
+</style>
