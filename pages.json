@@ -1,0 +1,1139 @@
+{
+	"pages": [ 
+        {
+			"path" : "pages/index/index",  // 首页路径
+			"style": {
+				"navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"backgroundColor":"#111111",  // 页面背景色
+				"navigationStyle":"custom",  // 自定义导航栏样式
+				"navigationBarTitleText":"首页",  // 导航栏标题
+				"app-plus":{  // App平台特定配置
+					"titleNView":false  // 禁用原生导航栏
+				},
+				"pullToRefresh": {  // 下拉刷新配置
+					"support": false,  // 启用下拉刷新
+					"style": "circle",  // 刷新样式为圆形
+					"contentdown": {  // 下拉时显示内容
+						"caption": "松开刷新"  // 下拉提示文字
+					}
+				}
+			}
+		},		
+		{
+            "path" : "pages/login/login",  // 登录页面路径
+            "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"type":"transparent",  // 透明导航栏
+						"titleText":"登录",  // 导航栏标题
+						"backgroundColor":"#f9b9d7"  // 导航栏背景色
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/wode/wode",  // 我的页面路径
+            "style" : {
+				"disablePullDownRefresh": true,  // 禁用下拉刷新
+				"navigationBarBackgroundColor":"#1f233b",  // 导航栏背景色
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"backgroundColor":"#1f233b",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"type":"transparent",  // 透明导航栏
+						"titleText":"我的",  // 导航栏标题
+						"backgroundColor":"#3b2073"  // 导航栏背景色
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/mydata/mydata",  // 个人信息页面路径
+            "style" : {
+                "navigationBarTitleText": "个人信息",  // 导航栏标题
+                "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+                "navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "backgroundColor":"#1f233b",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"titleColor":"#CCCBCB",  // 标题颜色
+						"padding-right":"15px"  // 右侧内边距
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/shezhi/shezhi",  // 设置页面路径
+            "style" : {
+                "navigationBarTitleText": "设置",  // 导航栏标题
+                "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+				"backgroundColor":"#222222",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"titleColor":"#FFFFFF"  // 标题颜色
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/play/play",  // 视频播放页面路径
+            "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"navigationBarTitleText":"视频播放",  // 导航栏标题
+                "app-plus":{  // App平台特定配置
+					"titleNView":false,  // 禁用原生导航栏
+					"subNVues":[  // 子原生窗体配置
+						{
+							"id":"gift",  // 子窗体ID
+							"path":"pages/play/sub/gift",  // 子窗体页面路径
+							"type":"popup",  // 弹出类型
+							"style":{  // 样式配置
+								"position":"absolute",  // 绝对定位
+								"height":"300px",  // 高度
+								"bottom":"0px",  // 底部对齐
+								"width":"100%",  // 宽度100%
+								"background":"transparent",  // 透明背景
+								"mask":"rgba(0,0,0,0.1)"  // 遮罩层透明度
+							}
+						}
+					]
+				},
+				"pullToRefresh": {  // 下拉刷新配置
+					"support": true,  // 启用下拉刷新
+					"style": "circle",  // 刷新样式为圆形
+					"contentdown": {  // 下拉时显示内容
+						"caption": "松开刷新"  // 下拉提示文字
+					}
+				}
+            }
+        },
+		{
+		    "path" : "pages/play/vplay",  // 视频播放页面路径（备用）
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"navigationBarTitleText":"视频播放",  // 导航栏标题
+		        "app-plus":{  // App平台特定配置
+					"titleNView":false,  // 禁用原生导航栏
+					"subNVues":[  // 子原生窗体配置
+						{
+							"id":"gift",  // 子窗体ID
+							"path":"pages/play/sub/gift",  // 子窗体页面路径
+							"type":"popup",  // 弹出类型
+							"style":{  // 样式配置
+								"position":"absolute",  // 绝对定位
+								"height":"300px",  // 高度
+								"bottom":"0px",  // 底部对齐
+								"width":"100%",  // 宽度100%
+								"background":"transparent",  // 透明背景
+								"mask":"rgba(0,0,0,0.4)"  // 遮罩层透明度
+							}
+						},
+						{
+							"id":"more",  // 子窗体ID
+							"path":"pages/play/sub/more",  // 子窗体页面路径
+							"type":"popup",  // 弹出类型
+							"style":{  // 样式配置
+								"position":"absolute",  // 绝对定位
+								"height":"350px",  // 高度
+								"bottom":"0px",  // 底部对齐
+								"width":"100%",  // 宽度100%
+								"background":"transparent",  // 透明背景
+								"mask":"rgba(0,0,0,0.3)"  // 遮罩层透明度
+							}
+						}
+					]
+				},
+				"pullToRefresh": {  // 下拉刷新配置
+					"support": true,  // 启用下拉刷新
+					"style": "circle",  // 刷新样式为圆形
+					"contentdown": {  // 下拉时显示内容
+						"caption": "松开刷新"  // 下拉提示文字
+					}
+				}
+		    }
+		},
+		{
+            "path" : "pages/extension/extension",  // 推广页面路径
+            "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"backgroundColor":"#FFFFFF",  // 页面背景色
+				"navigationBarTitleText":"我的推广",  // 导航栏标题
+                "app-plus":{  // App平台特定配置
+					"titleNView":{
+						"type":"transparent",  // 透明导航栏
+						"backgroundColor":"#f9b9d7",  // 导航栏背景色
+						"titleColor":"#000000"  // 标题颜色
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/msg/msginfo/msginfo",  // 消息详情页面路径
+            "style" : {
+                "navigationBarTitleText": "消息查看",  // 导航栏标题
+                "navigationBarBackgroundColor":"#ffffff",  // 导航栏背景色
+				"backgroundColor":"#F0F0F0"  // 页面背景色
+            }
+        },
+		{
+			"path": "pages/list/list",  // 视频列表页面路径
+			"style": {
+				"navigationBarBackgroundColor":"#1f233b",  // 导航栏背景色
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"backgroundColor":"#1f233b",  // 页面背景色
+				"navigationStyle":"custom",  // 自定义导航栏样式
+				"navigationBarTitleText":"视频列表",  // 导航栏标题
+				"app-plus":{  // App平台特定配置
+					"titleNView":false  // 禁用原生导航栏
+				},
+				"pullToRefresh": {  // 下拉刷新配置
+					"support": true,  // 启用下拉刷新
+					"style": "circle",  // 刷新样式为圆形
+					"contentdown": {  // 下拉时显示内容
+						"caption": "松开刷新"  // 下拉提示文字
+					}
+				}
+			}
+		},
+        {
+			"path" : "pages/video/index",  // 视频首页路径
+			"style": {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"navigationStyle":"custom",  // 自定义导航栏样式
+				"navigationBarTitleText":"四叶草影视",  // 导航栏标题
+				"app-plus":{  // App平台特定配置
+					"titleNView":false  // 禁用原生导航栏
+				},
+				"pullToRefresh": {  // 下拉刷新配置
+					"support": true,  // 启用下拉刷新
+					"style": "circle",  // 刷新样式为圆形
+					"contentdown": {  // 下拉时显示内容
+						"caption": "松开刷新"  // 下拉提示文字
+					}
+				}
+			}
+		},
+		{
+			"path" : "pages/video/jiexi",  // 影视解析页面路径
+			"style": {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"navigationStyle":"custom",  // 自定义导航栏样式
+				"navigationBarTitleText":"影视解析",  // 导航栏标题
+				"app-plus":{  // App平台特定配置
+					"titleNView":false  // 禁用原生导航栏
+				}
+			}
+		},
+        {
+            "path" : "pages/sou/sou",  // 搜索页面路径
+            "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "navigationStyle":"custom"  // 自定义导航栏样式
+            }
+        },
+		{
+		    "path" : "pages/sou/djsou",  // 电视剧搜索页面路径
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+		        "navigationStyle":"custom"  // 自定义导航栏样式
+		    }
+		},
+		{
+		    "path" : "pages/sou/dtso",  // 电影搜索页面路径
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+		        "navigationStyle":"custom"  // 自定义导航栏样式
+		    }
+		},
+		{
+		    "path" : "pages/sou/soupt",  // 平台搜索页面路径
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+		        "navigationStyle":"custom"  // 自定义导航栏样式
+		    }
+		},
+        {
+            "path" : "pages/msg/msg",  // 消息页面路径
+            "style" : {
+                "navigationBarTitleText": "消息",  // 导航栏标题
+                "navigationBarBackgroundColor":"#FFFFFF",  // 导航栏背景色
+                "backgroundColorBottom":"#F0F0F0",  // 底部背景色
+				"backgroundColorTop":"#FFFFFF"  // 顶部背景色
+            }
+        },
+		{
+		    "path" : "pages/wode/wallet/wallet",  // 财务中心页面路径
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"backgroundColor":"#FFFFFF",  // 页面背景色
+				"navigationBarTitleText":"财务中心",  // 导航栏标题
+		        "app-plus":{  // App平台特定配置
+					"titleNView":{
+						"type":"transparent",  // 透明导航栏
+						"backgroundColor":"#f9b9d7",  // 导航栏背景色
+						"titleColor":"#FFFFFF"  // 标题颜色
+					}
+				}
+		    }
+		},
+		{
+		    "path" : "pages/wode/wallet/baobiao",  // 收益报表页面路径
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"backgroundColor":"#FFFFFF",  // 页面背景色
+				"navigationBarTitleText":"收益报表",  // 导航栏标题
+		        "app-plus":{  // App平台特定配置
+					"titleNView":{
+						"type":"transparent",  // 透明导航栏
+						"backgroundColor":"#f9b9d7",  // 导航栏背景色
+						"titleColor":"#FFFFFF"  // 标题颜色
+					}
+				}
+		    }
+		},
+        {
+            "path" : "pages/wode/wallet/account/account",  // 绑定提现账户页面路径
+            "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "navigationBarTitleText": "绑定提现账户",  // 导航栏标题
+                "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+				"backgroundColor":"#111111",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"animationType":"slide-in-bottom",  // 底部滑入动画
+					"titleNView":{
+						"autoBackButton":false,  // 禁用自动返回按钮
+						"padding-right":"15px",  // 右侧内边距
+						"buttons":[{
+							"type":"close",  // 关闭按钮
+							"float":"right",  // 右浮动
+							"fontSize":"20px",  // 字体大小
+							"color":"#FFFFFF"  // 按钮颜色
+						}]
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/wode/wallet/account/setcard/setcard",  // 设置银行卡页面路径
+            "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "navigationBarTitleText": " ",  // 导航栏标题（空）
+                "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+                "backgroundColor":"#111111",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"animationType":"slide-in-bottom",  // 底部滑入动画
+					"titleNView":{
+						"autoBackButton":false,  // 禁用自动返回按钮
+						"padding-right":"15px",  // 右侧内边距
+						"buttons":[{
+							"type":"close",  // 关闭按钮
+							"float":"right",  // 右浮动
+							"fontSize":"20px",  // 字体大小
+							"color":"#ffffff"  // 按钮颜色
+						}]
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/wode/wallet/withdraw/withdraw",  // 提现页面路径
+            "style" : {
+                "navigationBarTitleText": "提现",  // 导航栏标题
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+                "backgroundColor":"#111111",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"titleColor":"#CCCBCB",  // 标题颜色
+						"padding-right":"15px",  // 右侧内边距
+						"buttons":[{
+							"text":"提现账户设置",  // 按钮文字
+							"fontSize":"13px",  // 字体大小
+							"width":"auto",  // 自动宽度
+							"color":"#CCCBCB"  // 按钮颜色
+						}]
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/wode/wallet/withdraw/ok/ok",  // 提现成功页面路径
+            "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "navigationBarTitleText": "提现",  // 导航栏标题
+                "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+                "backgroundColor":"#F5F5F5",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"animationType":"slide-in-bottom",  // 底部滑入动画
+					"animationDuration":200,  // 动画时长
+					"titleNView":{
+						"autoBackButton":false,  // 禁用自动返回按钮
+						"padding-right":"15px",  // 右侧内边距
+						"buttons":[{
+							"type":"close",  // 关闭按钮
+							"float":"right",  // 右浮动
+							"fontSize":"20px",  // 字体大小
+							"color":"#666565"  // 按钮颜色
+						}]
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/wode/wallet/withdrawalrecord/withdrawalrecord",  // 提现记录页面路径
+            "style" : {
+                "navigationBarTitleText": "提现记录",  // 导航栏标题
+                "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+                "navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "backgroundColor":"#FFFFFF",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"padding-right":"15px",  // 右侧内边距
+						"buttons":[  // 按钮配置
+							{
+								"fontSrc":"/static/font/iconfont.ttf",  // 字体文件路径
+								"text":"\ue629",  // 图标文字
+								"width":"12px",  // 宽度
+								"fontSize":"7px"  // 字体大小
+							},
+							{
+								"text":"",  // 空文字
+								"fontSize":"14px",  // 字体大小
+								"width":"auto"  // 自动宽度
+							}
+						]
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/wode/wallet/diamond/diamond",  // 充值钻石页面路径
+            "style" : {
+                "navigationBarTitleText": "充值钻石",  // 导航栏标题
+                "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+                "navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "backgroundColor":"#FFFFFF",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"titleColor":"#CCCBCB"  // 标题颜色
+					}
+				}
+            }
+        },
+		{
+		    "path" : "pages/wode/wallet/diamond/buydiamond",  // 卡密充值钻石页面路径
+		    "style" : {
+		        "navigationBarTitleText": "卡密充值钻石",  // 导航栏标题
+		        "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+		        "navigationBarTextStyle":"white",  // 导航栏文字颜色
+		        "backgroundColor":"#D2D2D2",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"titleColor":"#D2D2D2"  // 标题颜色
+					}
+				}
+		    }
+		},
+		{
+		    "path" : "pages/wode/wallet/diamond/exchange",  // 钻石兑换余额页面路径
+		    "style" : {
+		        "navigationBarTitleText": "钻石兑换余额",  // 导航栏标题
+		        "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+		        "navigationBarTextStyle":"white",  // 导航栏文字颜色
+		        "backgroundColor":"#FFFFFF"  // 页面背景色
+		    }
+		},
+        {
+            "path" : "pages/wode/wallet/diamonddetails/diamonddetails",  // 钻石交易明细页面路径
+            "style" : {
+                "navigationBarTitleText": "钻石交易明细",  // 导航栏标题
+                "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+                "navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "backgroundColor":"#FFFFFF"  // 页面背景色
+            }
+        },
+		{
+		    "path" : "pages/wode/wallet/giftrecord/giftrecord",  // 礼物赠送记录页面路径
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+		        "navigationBarTitleText": "礼物赠送记录",  // 导航栏标题
+		        "backgroundColor":"#FFFFFF",  // 页面背景色
+		        "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"titleColor":"#CCCBCB"  // 标题颜色
+					}
+				}
+		    }
+		},
+		{
+		    "path": "pages/wode/myfollow/myfollow",  // 我的收藏页面路径
+		   "style" : {
+		       "navigationBarTitleText": "我的收藏",  // 导航栏标题
+		       "navigationBarBackgroundColor":"#0D0D0D",  // 导航栏背景色
+			   "navigationBarTextStyle":"white",  // 导航栏文字颜色
+		       "backgroundColor":"#FFFFFF",  // 页面背景色
+			   "app-plus":{  // App平台特定配置
+			   		"titleNView":{
+			   			"titleColor":"#CCCBCB"  // 标题颜色
+			   		}
+			   }
+		   }
+		},
+		{
+		    "path" : "pages/wode/myfollow/myguanzhu",  // 我的关注页面路径
+		   "style" : {
+			   "navigationBarTextStyle":"white",  // 导航栏文字颜色
+		       "navigationBarTitleText": "我的关注",  // 导航栏标题
+		       "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+		       "backgroundColor":"#111111",  // 页面背景色
+		 		"app-plus":{  // App平台特定配置
+		 			"titleNView":{
+		 				"titleColor":"#CCCBCB"  // 标题颜色
+		 			}
+		 		}
+		   }
+		},
+        {
+      "path" : "pages/wode/record/record",  // 观看记录页面路径
+     "style" : {
+         "navigationBarTitleText": "观看记录",  // 导航栏标题
+         "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+		 "navigationBarTextStyle":"white",  // 导航栏文字颜色
+         "backgroundColor":"#FFFFFF",  // 页面背景色
+ 		"titleNView":{  // 导航栏配置
+			"titleColor":"#CCCBCB",  // 标题颜色
+ 			"padding-right":"15px",  // 右侧内边距
+ 			"buttons":[{
+ 				"text":"全部清空",  // 按钮文字
+ 				"fontSize":"17px",  // 字体大小
+				"fontWeight":"bold",  // 字体粗细
+ 				"width":"auto",  // 自动宽度
+ 				"color":"#CCCBCB"  // 按钮颜色
+ 			}]
+ 		}
+     }
+  },
+  {
+      "path" : "pages/tool/jiexi/ptrecord",  // 平台观看记录页面路径
+     "style" : {
+         "navigationBarTitleText": "观看记录",  // 导航栏标题
+         "navigationBarBackgroundColor":"#1f233b",  // 导航栏背景色
+		 "navigationBarTextStyle":"white",  // 导航栏文字颜色
+         "backgroundColor":"#1f233b",  // 页面背景色
+   		"titleNView":{  // 导航栏配置
+			"titleColor":"#6772c2",  // 标题颜色
+   			"padding-right":"15px",  // 右侧内边距
+   			"buttons":[{
+   				"text":"全部清空",  // 按钮文字
+   				"fontSize":"15px",  // 字体大小
+  				"fontWeight":"bold",  // 字体粗细
+   				"width":"auto",  // 自动宽度
+   				"color":"#6772c2"  // 按钮颜色
+   			}]
+   		}
+     }
+  },
+  {
+      "path" : "pages/dongtai/dtsc",  // 我的收藏页面路径
+     "style" : {
+        "navigationBarTitleText": "我的收藏",  // 导航栏标题
+        "navigationBarBackgroundColor":"#000000",  // 导航栏背景色
+        "backgroundColor":"#FFFFFF",  // 页面背景色
+		"navigationBarTextStyle":"white",  // 导航栏文字颜色
+   		"titleNView":{  // 导航栏配置
+   			"padding-right":"15px",  // 右侧内边距
+   			"buttons":[{
+   				"text":"全部清空",  // 按钮文字
+   				"fontSize":"17px",  // 字体大小
+  				"fontWeight":"bold",  // 字体粗细
+   				"width":"auto",  // 自动宽度
+   				"color":"#CCCBCB"  // 按钮颜色
+   			}]
+   		}
+     }
+   },
+        {
+            "path" : "pages/wode/wallet/direction/direction",  // 交易明细页面路径
+            "style" : {
+                "navigationBarTitleText": "交易明细",  // 导航栏标题
+                "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+				"backgroundColor":"#FFFFFF",  // 页面背景色
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"padding-right":"15px",  // 右侧内边距
+						"buttons":[  // 按钮配置
+							{
+								"fontSrc":"/static/font/iconfont.ttf",  // 字体文件路径
+								"text":"\ue629",  // 图标文字
+								"width":"12px",  // 宽度
+								"fontSize":"7px"  // 字体大小
+							},
+							{
+								"text":"",  // 空文字
+								"fontSize":"16px",  // 字体大小
+								"width":"auto"  // 自动宽度
+							}
+						]
+					}
+				}
+            }
+        },
+        {
+            "path" : "pages/extension/userdetails/userdetails",  // 推广人数详情页面路径
+            "style" : {
+				"navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+				"backgroundColor":"#FFFFFF",  // 页面背景色
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "navigationBarTitleText": "推广人数详情"  // 导航栏标题
+            }
+        },
+        {
+            "path" : "pages/extension/profitdetails/profitdetails",  // 收益明细页面路径
+            "style" : {
+				"navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+				"backgroundColor":"#555555",  // 页面背景色
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "navigationBarTitleText": "收益明细"  // 导航栏标题
+            }
+        },
+        {
+            "path" : "pages/shezhi/cancellation/cancellation",  // 注销账号页面路径
+            "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+                "navigationBarTitleText": "注销账号",  // 导航栏标题
+                "backgroundColor":"#9C69F5",  // 页面背景色
+                "navigationBarBackgroundColor":"#111111"  // 导航栏背景色
+            }
+        },
+		{
+		    "path" : "pages/vip/vip",  // VIP页面路径
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"backgroundColor":"#111111",  // 页面背景色
+				"navigationBarTitleText":"开通VIP",  // 导航栏标题
+		        "app-plus":{  // App平台特定配置
+					"titleNView":{
+						"type":"transparent",  // 透明导航栏
+						"backgroundColor":"#CCCBCB",  // 导航栏背景色
+						"titleColor":"#CCCBCB"  // 标题颜色
+					}
+				}
+		    }
+		},
+		{
+		    "path" : "pages/vip/card",  // 卡密激活会员页面路径
+		    "style" : {
+		        "navigationBarTitleText": "卡密激活会员",  // 导航栏标题
+		        "navigationBarBackgroundColor":"#111111",  // 导航栏背景色
+		        "navigationBarTextStyle":"white",  // 导航栏文字颜色
+		        "backgroundColor":"#1f233b",  // 页面背景色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"titleColor":"#F2F2F2"  // 标题颜色
+					}
+				}
+		    }
+		},
+        {
+            "path" : "pages/gengxin/gengxin",  // 更新页面路径
+            "style" : {
+                "navigationStyle":"custom",  // 自定义导航栏样式
+				"backgroundColor":"rgba(0,0,0,0.3)",  // 页面背景色（半透明）
+				"app-plus":{  // App平台特定配置
+					"animationType":"fade-in",  // 淡入动画
+					"background":"rgba(0,0,0,0.3)"  // 背景色（半透明）
+				}
+            }
+        },
+		{
+		    "path" : "pages/add/index",  // 发布内容页面路径
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"backgroundColor":"#FFFFFF",  // 页面背景色
+				"navigationBarTitleText":"发布内容",  // 导航栏标题
+		        "app-plus":{  // App平台特定配置
+					"titleNView":{
+						"type":"transparent",  // 透明导航栏
+						"backgroundColor":"#f9b9d7",  // 导航栏背景色
+						"titleColor":"#000000"  // 标题颜色
+					}
+				}
+		    }
+		},
+        {
+			"path" : "pages/dongtai/list",  // 动态列表页面路径
+			"style": {
+				"navigationBarBackgroundColor":"#1f233b",  // 导航栏背景色
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"backgroundColor":"#1f233b",  // 页面背景色
+				"navigationStyle":"custom",  // 自定义导航栏样式
+				"navigationBarTitleText":"动态",  // 导航栏标题
+				"app-plus":{  // App平台特定配置
+					"titleNView":false  // 禁用原生导航栏
+				},
+				"pullToRefresh": {  // 下拉刷新配置
+					"support": true,  // 启用下拉刷新
+					"style": "circle",  // 刷新样式为圆形
+					"contentdown": {  // 下拉时显示内容
+						"caption": "松开刷新"  // 下拉提示文字
+					}
+				}
+			}
+		},
+		{
+		     "path" : "pages/dongtai/play",  // 动态视频播放页面路径
+		     "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"navigationStyle":"custom",  // 自定义导航栏样式
+				"navigationBarTitleText":"视频播放",  // 导航栏标题
+		         "app-plus":{  // App平台特定配置
+					"titleNView":false,  // 禁用原生导航栏
+					"subNVues":[  // 子原生窗体配置
+						{
+							"id":"gift",  // 子窗体ID
+							"path":"pages/play/sub/gift",  // 子窗体页面路径
+							"type":"popup",  // 弹出类型
+							"style":{  // 样式配置
+								"position":"absolute",  // 绝对定位
+								"height":"300px",  // 高度
+								"bottom":"0px",  // 底部对齐
+								"width":"100%",  // 宽度100%
+								"background":"transparent",  // 透明背景
+								"mask":"rgba(0,0,0,0.1)"  // 遮罩层透明度
+							}
+						}
+					]
+				},
+				"pullToRefresh": {  // 下拉刷新配置
+					"support": true,  // 启用下拉刷新
+					"style": "circle",  // 刷新样式为圆形
+					"contentdown": {  // 下拉时显示内容
+						"caption": "松开刷新"  // 下拉提示文字
+					}
+				}
+			}
+		 },
+		 {
+		      "path" : "pages/wode/play",  // 我的视频播放页面路径
+		      "style" : {
+		 		"navigationBarTextStyle":"white",  // 导航栏文字颜色
+		 		"navigationStyle":"custom",  // 自定义导航栏样式
+		 		"navigationBarTitleText":"视频播放",  // 导航栏标题
+		          "app-plus":{  // App平台特定配置
+		 			"titleNView":false  // 禁用原生导航栏
+		 		},
+		 		"pullToRefresh": {  // 下拉刷新配置
+		 			"support": true,  // 启用下拉刷新
+		 			"style": "circle",  // 刷新样式为圆形
+		 			"contentdown": {  // 下拉时显示内容
+		 				"caption": "松开刷新"  // 下拉提示文字
+		 			}
+		 		}
+		 	}
+		 },
+		{
+			"path": "pages/dongtai/userpage",  // 作者主页页面路径
+			"style": {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"type":"transparent",  // 透明导航栏
+						"titleText":"作者主页",  // 导航栏标题
+						"fontWeight":"bold",  // 字体粗细
+						"fontSize":"22px",  // 字体大小
+						"backgroundColor":"#111111"  // 导航栏背景色
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/wode/myvideo",  // 我的视频页面路径
+			"style": {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"app-plus":{  // App平台特定配置
+					"titleNView":{
+						"type":"transparent",  // 透明导航栏
+						"titleText":"我的视频",  // 导航栏标题
+						"fontWeight":"bold",  // 字体粗细
+						"fontSize":"22px",  // 字体大小
+						"backgroundColor":"#111111"  // 导航栏背景色
+					}
+				}
+			}
+		},
+         {
+		   "path" : "pages/tool/jiexi/page",  // 影视平台页面路径
+		   "style" : {
+		       "navigationBarTitleText": "影视平台",  // 导航栏标题
+		       "navigationBarBackgroundColor":"#FFFFFF",  // 导航栏背景色
+		       "backgroundColor":"#F0F0F0",  // 页面背景色
+		 		"titleNView":{  // 导航栏配置
+		 			"padding-right":"15px",  // 右侧内边距
+		 			"buttons":[{
+		 				"text":"返回首页",  // 按钮文字
+		 				"fontSize":"15px",  // 字体大小
+						"fontWeight":"bold",  // 字体粗细
+		 				"width":"auto",  // 自动宽度
+		 				"color":"#000000"  // 按钮颜色
+		 			}]
+		 		}
+		   }
+		},
+		{
+		   "path" : "pages/tool/jiexi/play",  // 解析播放页面路径
+		   "style" : {
+		       "navigationBarTitleText": "解析播放中",  // 导航栏标题
+		       "navigationBarBackgroundColor":"#000000",  // 导航栏背景色
+		       "backgroundColor":"#000000",  // 页面背景色
+			   "navigationBarTextStyle": "white",  // 导航栏文字颜色
+			   "backgroundTextStyle":"#FFFFFF",  // 背景文字样式
+		 		"titleNView":{  // 导航栏配置
+		 			"padding-right":"15px"  // 右侧内边距
+		 		}
+		   }
+		},
+		{
+		    "path" : "pages/tool/jiexi/jiekou",  // 选择解析接口页面路径
+		    "style" : {
+		        "navigationBarTitleText": "选择解析接口",  // 导航栏标题
+		        "backgroundColor":"#f9b9d7",  // 页面背景色
+		        "navigationBarBackgroundColor":"#ffffff",  // 导航栏背景色
+				"backgroundTextStyle":"#000000"  // 背景文字样式
+		    }
+		},
+		{
+		   "path" : "pages/tool/jiexi/plays",  // 解析播放页面路径（备用）
+		   "style" : {
+		       "navigationBarTitleText": "解析播放中",  // 导航栏标题
+		       "navigationBarBackgroundColor":"#000000",  // 导航栏背景色
+		       "backgroundColor":"#000000",  // 页面背景色
+			   "navigationBarTextStyle": "white",  // 导航栏文字颜色
+			   "backgroundTextStyle":"#FFFFFF",  // 背景文字样式
+		 		"titleNView":{  // 导航栏配置
+		 			"padding-right":"15px"  // 右侧内边距
+		 		}
+		   }
+		},
+		{
+		    "path" : "pages/tool/jiexi/jiekous",  // 选择解析接口页面路径（备用）
+		    "style" : {
+		        "navigationBarTitleText": "选择解析接口",  // 导航栏标题
+		        "backgroundColor":"#f9b9d7",  // 页面背景色
+		        "navigationBarBackgroundColor":"#ffffff",  // 导航栏背景色
+				"backgroundTextStyle":"#000000"  // 背景文字样式
+		    }
+		},
+		{
+		    "path" : "pages/vip/view",  // 购买VIP页面路径
+		    "style" : {
+		        "navigationBarTitleText": "购买VIP",  // 导航栏标题
+		        "backgroundColor":"#f9b9d7",  // 页面背景色
+		        "navigationBarBackgroundColor":"#ffffff",  // 导航栏背景色
+				"backgroundTextStyle":"#FFFFFF"  // 背景文字样式
+		    }
+		},
+		{
+		   "path" : "hybrid/html/page",  // 混合HTML页面路径
+		   "style" : {
+		       "navigationBarTitleText": "影视平台",  // 导航栏标题
+		       "navigationBarBackgroundColor":"#FFFFFF",  // 导航栏背景色
+		       "backgroundColor":"#F0F0F0",  // 页面背景色
+		 		"titleNView":{  // 导航栏配置
+		 			"padding-right":"15px",  // 右侧内边距
+		 			"buttons":[{
+		 				"text":"返回首页",  // 按钮文字
+		 				"fontSize":"15px",  // 字体大小
+						"fontWeight":"bold",  // 字体粗细
+		 				"width":"auto",  // 自动宽度
+		 				"color":"#000000"  // 按钮颜色
+		 			}]
+		 		}
+		   }
+		},
+		{
+		   "path" : "hybrid/html/play",  // 混合HTML播放页面路径
+		   "style" : {
+		       "navigationBarTitleText": "解析播放中",  // 导航栏标题
+		       "navigationBarBackgroundColor":"#000000",  // 导航栏背景色
+		       "backgroundColor":"#000000",  // 页面背景色
+			   "navigationBarTextStyle": "white",  // 导航栏文字颜色
+			   "backgroundTextStyle":"#FFFFFF",  // 背景文字样式
+		 		"titleNView":{  // 导航栏配置
+		 			"padding-right":"15px"  // 右侧内边距
+		 		}
+		   }
+		},
+		{
+		    "path" : "hybrid/html/jiekou",  // 混合HTML解析接口页面路径
+		    "style" : {
+		        "navigationBarTitleText": "选择解析接口",  // 导航栏标题
+		        "backgroundColor":"#f9b9d7",  // 页面背景色
+		        "navigationBarBackgroundColor":"#ffffff",  // 导航栏背景色
+				"backgroundTextStyle":"#000000"  // 背景文字样式
+		    }
+		},
+		{
+		    "path" : "pages/duanju/play",  // 短剧播放页面路径
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+		       "navigationStyle": "custom",  // 自定义导航栏样式
+		       "app-plus" : {
+		           "titleNView" : false  // 禁用原生导航栏
+		       }
+		    }
+		},
+		{
+		    "path" : "pages/duanju/sou",  // 短剧搜索页面路径
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+				"navigationBarTitleText": "搜索",  // 导航栏标题
+				"navigationBarBackgroundColor":"#000000",  // 导航栏背景色
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色
+		        "navigationStyle":"custom"  // 自定义导航栏样式
+		    }
+		},
+{
+		    "path" : "pages/duanju/record",  // 页面路径：短剧观看记录
+		    "style" : {
+		        "navigationBarTitleText": "观看记录",  // 导航栏标题文字
+		        "navigationBarBackgroundColor":"#000000",  // 导航栏背景颜色：黑色
+		        "navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+		        "backgroundColor":"#000000",  // 页面背景颜色：黑色
+				"app-plus":{  // App平台特有配置
+					"titleNView":{
+						"titleColor":"#CCCBCB",  // 导航栏标题颜色：浅灰色
+						"padding-right":"15px",  // 导航栏右侧内边距
+						"buttons":[{  // 导航栏右侧按钮配置
+							"text":"全部清空",  // 按钮文字
+							"fontSize":"17px",  // 按钮文字大小
+							"fontWeight":"bold",  // 按钮文字粗细：粗体
+							"width":"auto",  // 按钮宽度：自动
+							"color":"#CCCBCB"  // 按钮文字颜色：浅灰色
+						}]
+					}
+				}
+		    }
+		},
+		{
+		    "path" : "pages/duanju/pay",  // 页面路径：短剧购买页面
+		    "style" : {
+		        "navigationBarTitleText": "购买短剧",  // 导航栏标题文字
+		        "navigationBarBackgroundColor":"#111111",  // 导航栏背景颜色：深灰色
+		        "navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+		        "backgroundColor":"#111111",  // 页面背景颜色：深灰色
+				"app-plus":{  // App平台特有配置
+					"titleNView":{
+						"titleColor":"#CCCBCB"  // 导航栏标题颜色：浅灰色
+					}
+				}
+		    }
+		},
+		{
+			"path" : "pages/duanju/index",  // 页面路径：短剧首页
+			"style": {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+				"navigationStyle":"custom",  // 导航栏样式：自定义（隐藏默认导航栏）
+				"navigationBarTitleText":"短剧",  // 导航栏标题文字
+				"app-plus":{  // App平台特有配置
+					"titleNView":false  // 禁用原生导航栏
+				}
+			}
+		},
+		{
+			"path" : "pages/duanju/list",  // 页面路径：短剧列表页
+			"style": {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+				"navigationStyle":"custom",  // 导航栏样式：自定义（隐藏默认导航栏）
+				"navigationBarTitleText":"短剧",  // 导航栏标题文字
+				"app-plus":{  // App平台特有配置
+					"titleNView":false  // 禁用原生导航栏
+				},
+				"pullToRefresh": {  // 下拉刷新配置
+					"support": true,  // 是否支持下拉刷新：true表示支持
+					"style": "circle",  // 下拉刷新样式：圆形
+					"contentdown": {  // 下拉过程中的提示内容
+						"caption": "松开刷新"  // 下拉提示文字
+					}
+				}
+			}
+		},
+		{
+		    "path" : "pages/play/dlna",  // 页面路径：投屏页面
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+		        "navigationBarTitleText": "投屏",  // 导航栏标题文字
+		        "navigationBarBackgroundColor":"#111111",  // 导航栏背景颜色：深灰色
+		        "backgroundColor":"#111111"  // 页面背景颜色：深灰色
+		    }
+		},
+		{
+		    "path" : "pages/pay/index",  // 页面路径：开通会员页面
+		    "style" : {
+		        "navigationBarTitleText": "开通会员",  // 导航栏标题文字
+		        "navigationBarBackgroundColor":"#111111",  // 导航栏背景颜色：深灰色
+		        "navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+		        "backgroundColor":"#111111",  // 页面背景颜色：深灰色
+				"app-plus":{  // App平台特有配置
+					"titleNView":{
+						"titleColor":"#FFFFFF"  // 导航栏标题颜色：白色
+					}
+				}
+		    }
+		},
+		{
+		    "path" : "pages/pay/pay",  // 页面路径：付款页面
+		    "style" : {
+		        "navigationBarTitleText": "开通会员-付款",  // 导航栏标题文字
+		        "navigationBarBackgroundColor":"#fff",  // 导航栏背景颜色：白色
+		        "navigationBarTextStyle":"black",  // 导航栏文字颜色：黑色
+		        "backgroundColor":"#FFFFFF",  // 页面背景颜色：白色
+				"app-plus":{  // App平台特有配置
+					"titleNView":{
+						"titleColor":"#000"  // 导航栏标题颜色：黑色
+					}
+				}
+		    }
+		},
+		{
+			"path" : "pages/duanju_apple/index",  // 页面路径：苹果版短剧首页
+			"style": {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+				"navigationStyle":"custom",  // 导航栏样式：自定义（隐藏默认导航栏）
+				"navigationBarTitleText":"短剧",  // 导航栏标题文字
+				"app-plus":{  // App平台特有配置
+					"titleNView":false  // 禁用原生导航栏
+				}
+			}
+		},
+		{
+		    "path" : "pages/duanju_apple/play",  // 页面路径：苹果版短剧播放页
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+		       "navigationStyle": "custom",  // 导航栏样式：自定义（隐藏默认导航栏）
+		       "app-plus" : {  // App平台特有配置
+		           "titleNView" : false  // 禁用原生导航栏
+		       }
+		    }
+		},
+		{
+		    "path" : "pages/duanju_apple/follow",  // 页面路径：苹果版短剧追剧页
+		    "style" : {
+		        "navigationBarTitleText": "我的追剧",  // 导航栏标题文字
+		        "navigationBarBackgroundColor":"#000000",  // 导航栏背景颜色：黑色
+		        "navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+		        "backgroundColor":"#1f233b",  // 页面背景颜色：深蓝色
+				"app-plus":{  // App平台特有配置
+					"titleNView":{
+						"titleColor":"#CCCBCB",  // 导航栏标题颜色：浅灰色
+						"padding-right":"15px",  // 导航栏右侧内边距
+						"buttons":[{  // 导航栏右侧按钮配置
+							"text":"全部清空",  // 按钮文字
+							"fontSize":"17px",  // 按钮文字大小
+							"fontWeight":"bold",  // 按钮文字粗细：粗体
+							"width":"auto",  // 按钮宽度：自动
+							"color":"#CCCBCB"  // 按钮文字颜色：浅灰色
+						}]
+					}
+				}
+		    }
+		},
+		{
+		    "path" : "pages/duanju_apple/record",  // 页面路径：苹果版短剧观看记录
+		    "style" : {
+		        "navigationBarTitleText": "观看记录",  // 导航栏标题文字
+		        "navigationBarBackgroundColor":"#000000",  // 导航栏背景颜色：黑色
+		        "navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+		        "backgroundColor":"#000000",  // 页面背景颜色：黑色
+				"app-plus":{  // App平台特有配置
+					"titleNView":{
+						"titleColor":"#CCCBCB",  // 导航栏标题颜色：浅灰色
+						"padding-right":"15px",  // 导航栏右侧内边距
+						"buttons":[{  // 导航栏右侧按钮配置
+							"text":"全部清空",  // 按钮文字
+							"fontSize":"17px",  // 按钮文字大小
+							"fontWeight":"bold",  // 按钮文字粗细：粗体
+							"width":"auto",  // 按钮宽度：自动
+							"color":"#CCCBCB"  // 按钮文字颜色：浅灰色
+						}]
+					}
+				}
+		    }
+		},
+		{
+		    "path" : "pages/duanju_apple/sou",  // 页面路径：苹果版短剧搜索页
+		    "style" : {
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+				"navigationBarTitleText": "搜索",  // 导航栏标题文字
+				"navigationBarBackgroundColor":"#000000",  // 导航栏背景颜色：黑色
+				"navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+		        "navigationStyle":"custom"  // 导航栏样式：自定义（隐藏默认导航栏）
+		    }
+		},
+		{
+		    "path" : "pages/duanju_apple/pay",  // 页面路径：苹果版短剧购买页
+		    "style" : {
+		        "navigationBarTitleText": "购买短剧",  // 导航栏标题文字
+		        "navigationBarBackgroundColor":"#111111",  // 导航栏背景颜色：深灰色
+		        "navigationBarTextStyle":"white",  // 导航栏文字颜色：白色
+		        "backgroundColor":"#111111",  // 页面背景颜色：深灰色
+				"app-plus":{  // App平台特有配置
+					"titleNView":{
+						"titleColor":"#CCCBCB"  // 导航栏标题颜色：浅灰色
+					}
+				}
+		    }
+		}
+    ],
+	"globalStyle": {  // 全局样式配置
+		"pageOrientation":"auto",  // 页面方向：自动（横竖屏自适应）
+		"navigationBarTextStyle": "black",  // 全局导航栏文字颜色：黑色
+		"navigationBarTitleText": "",  // 全局导航栏标题文字：空
+		"navigationBarBackgroundColor": "#111111",  // 全局导航栏背景颜色：深灰色
+		"backgroundColor": "#111111",  // 全局页面背景颜色：深灰色
+		"app-plus":{  // App平台全局特有配置
+			"scrollIndicator":"none"  // 滚动条指示器：无（隐藏滚动条）
+		}
+	},
+	"tabBar":{  // 底部标签栏配置
+		"backgroundColor": "#151515",  // 标签栏背景颜色：深灰色
+		"color":"#707688",  // 标签文字默认颜色：灰色
+		"selectedColor":"#555555",  // 标签文字选中颜色：深灰色
+		"borderStyle":"black",  // 标签栏边框样式：黑色
+		"list":[  // 标签列表
+			{
+				"iconPath":"static/icon/shouye.png",  // 图标路径：首页默认图标
+				"selectedIconPath":"static/icon/shouye1.png",  // 选中图标路径：首页选中图标
+				"pagePath":"pages/index/index",  // 对应页面路径
+				"text":"首页"  // 标签文字
+			},
+			{
+				"iconPath":"static/icon/video.png",  // 图标路径：影院默认图标
+				"selectedIconPath":"static/icon/video1.png",  // 选中图标路径：影院选中图标
+				"text":"影院",  // 标签文字
+				"pagePath":"pages/video/index"  // 对应页面路径
+			},
+			{
+				"iconPath":"static/icon/guangchang.png",  // 图标路径：广场默认图标
+				"selectedIconPath":"static/icon/guangchang1.png",  // 选中图标路径：广场选中图标
+				"text":"广场",  // 标签文字
+				"pagePath":"pages/dongtai/list"  // 对应页面路径
+			},
+			{
+				"iconPath":"static/icon/shipin.png",  // 图标路径：短剧默认图标
+				"selectedIconPath":"static/icon/shipin1.png",  // 选中图标路径：短剧选中图标
+				"text":"短剧",  // 标签文字
+				"pagePath":"pages/duanju/index"  // 对应页面路径
+			},
+			{
+				"iconPath":"static/icon/wode.png",  // 图标路径：我的默认图标
+				"selectedIconPath":"static/icon/wode1.png",  // 选中图标路径：我的选中图标
+				"text":"我的",  // 标签文字
+				"pagePath":"pages/wode/wode"  // 对应页面路径
+			}
+		]
+	}
+}

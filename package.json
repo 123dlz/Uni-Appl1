@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "video.js": "^8.17.4"
+  },
+  "dependencies": {
+    "hls.js": "^1.5.15",
+    "mui-player": "^1.8.1"
+  }
+}
